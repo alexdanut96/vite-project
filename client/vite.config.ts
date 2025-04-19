@@ -17,6 +17,7 @@ export default defineConfig({
       "@script": path.resolve(__dirname, "./src/script"),
       "@media": path.resolve(__dirname, "./src/media"),
       "@lib": path.resolve(__dirname, "./src/lib"),
+      "@globalWrappers": path.resolve(__dirname, "./src/globalWrappers"),
     },
   },
 });
