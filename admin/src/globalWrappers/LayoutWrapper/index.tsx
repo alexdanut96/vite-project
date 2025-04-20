@@ -1,57 +1,28 @@
 import { OutletWrapper } from "@globalWrappers/OutletWrapper";
-
-import * as React from "react";
-import { createTheme, styled } from "@mui/material/styles";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import DescriptionIcon from "@mui/icons-material/Description";
 import LayersIcon from "@mui/icons-material/Layers";
-import { AppProvider, Navigation, Router } from "@toolpad/core/AppProvider";
-import { DashboardLayout } from "@toolpad/core/DashboardLayout";
+import { Navigation } from "@toolpad/core/AppProvider";
+import { DashboardLayout, ThemeSwitcher } from "@toolpad/core";
 import { PageContainer } from "@toolpad/core/PageContainer";
-import { SkeletonLoader } from "./components";
 import { paths } from "@script/utils/globalData";
 import { ReactRouterAppProvider } from "@toolpad/core/react-router";
+import { Chip } from "@mui/material";
+import { useTheme } from "@mui/material";
+import { HeaderSearch } from "./components";
+import { useState, useMemo } from "react";
+import { type Session } from "@toolpad/core/AppProvider";
 
-const demoTheme = createTheme({
-  colorSchemes: { light: true, dark: true },
-  cssVariables: {
-    colorSchemeSelector: "class",
-  },
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 600,
-      md: 600,
-      lg: 1200,
-      xl: 1536,
+const LayoutWrapper = () => {
+  const [session, setSession] = useState<Session | null>({
+    user: {
+      name: "Bharat Kashyap",
+      email: "bharatkashyap@outlook.com",
+      image: "https://avatars.githubusercontent.com/u/19550456",
     },
-  },
-});
-
-function useDemoRouter(initialPath: string): Router {
-  const [pathname, setPathname] = React.useState(initialPath);
-
-  const router = React.useMemo(() => {
-    return {
-      pathname,
-      searchParams: new URLSearchParams(),
-      navigate: (path: string | URL) => setPathname(String(path)),
-    };
-  }, [pathname]);
-
-  return router;
-}
-
-const Skeleton = styled("div")<{ height: number }>(({ theme, height }) => ({
-  backgroundColor: theme.palette.action.hover,
-  // borderRadius: theme.shape.borderRadius,
-  height,
-  content: '" "',
-}));
-
-const LayoutWrapper = (props: any) => {
+  });
   const NAVIGATION: Navigation = [
     {
       kind: "header",
@@ -63,8 +34,13 @@ const LayoutWrapper = (props: any) => {
       icon: <DashboardIcon />,
     },
     {
-      segment: paths.test.name,
-      title: "Test",
+      segment: paths.analytics.name,
+      title: "Analytics",
+      icon: <ShoppingCartIcon />,
+    },
+    {
+      segment: paths.sales.name,
+      title: "Sales",
       icon: <ShoppingCartIcon />,
     },
     {
@@ -75,9 +51,10 @@ const LayoutWrapper = (props: any) => {
       title: "Analytics",
     },
     {
-      segment: "reports",
-      title: "Reports",
+      segment: paths.users.name,
+      title: "Users",
       icon: <BarChartIcon />,
+      action: <Chip label={89} color="primary" size="small" />,
       children: [
         {
           segment: "sales",
@@ -92,17 +69,73 @@ const LayoutWrapper = (props: any) => {
       ],
     },
     {
-      segment: "integrations",
-      title: "Integrations",
+      segment: paths.products.name,
+      title: "Products",
       icon: <LayersIcon />,
     },
   ];
+
+  const theme = useTheme();
+
+  const dashboardLayoutStyles = {
+    "& .MuiContainer-maxWidthLg": {
+      maxWidth: "100%",
+      margin: 0,
+      padding: theme.spacing(2),
+
+      "& .MuiStack-root": {
+        margin: 0,
+      },
+    },
+    "& .MuiBreadcrumbs-ol": {
+      fontSize: theme.spacing(1.5),
+    },
+    "& .MuiTypography-h4": {
+      fontSize: theme.spacing(2.5),
+    },
+  };
+
+  const authentication = useMemo(() => {
+    return {
+      signIn: () => {
+        setSession({
+          user: {
+            name: "Bharat Kashyap",
+            email: "bharatkashyap@outlook.com",
+            image: "https://avatars.githubusercontent.com/u/19550456",
+          },
+        });
+      },
+      signOut: () => {
+        setSession(null);
+      },
+    };
+  }, []);
+
   return (
-    <ReactRouterAppProvider navigation={NAVIGATION}>
-      <DashboardLayout>
+    <ReactRouterAppProvider
+      navigation={NAVIGATION}
+      session={session}
+      authentication={authentication}
+    >
+      <DashboardLayout
+        defaultSidebarCollapsed
+        branding={{
+          homeUrl: paths.home.href,
+          title: "Print Admin",
+          logo: false,
+          // logo: <img src={whiteLogo} alt="logo" />,
+        }}
+        slots={{
+          toolbarActions: HeaderSearch,
+          sidebarFooter: ThemeSwitcher,
+        }}
+        // sidebarExpandedWidth={"fit-content"}
+        // hideNavigation
+        sx={dashboardLayoutStyles}
+      >
         <PageContainer>
           <OutletWrapper />
-          {/* <SkeletonLoader /> */}
         </PageContainer>
       </DashboardLayout>
     </ReactRouterAppProvider>

@@ -6,10 +6,25 @@ const paths = {
     href: NavigationPaths.home,
     name: NavigationPaths.home.replace("/", ""),
   },
-  test: {
+  analytics: {
     id: 1,
-    href: NavigationPaths.test,
-    name: NavigationPaths.test.replace("/", ""),
+    href: NavigationPaths.analytics,
+    name: NavigationPaths.analytics.replace("/", ""),
+  },
+  sales: {
+    id: 1,
+    href: NavigationPaths.sales,
+    name: NavigationPaths.sales.replace("/", ""),
+  },
+  users: {
+    id: 1,
+    href: NavigationPaths.users,
+    name: NavigationPaths.users.replace("/", ""),
+  },
+  products: {
+    id: 1,
+    href: NavigationPaths.products,
+    name: NavigationPaths.products.replace("/", ""),
   },
 };
 

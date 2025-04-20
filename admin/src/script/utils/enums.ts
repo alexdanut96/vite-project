@@ -1,6 +1,9 @@
 enum NavigationPaths {
   home = "/",
-  test = "/test",
+  analytics = "/analytics",
+  sales = "/sales",
+  users = "/users",
+  products = "/products",
   //   accountInfo = "/account/:dbid/:aid",
 }
 

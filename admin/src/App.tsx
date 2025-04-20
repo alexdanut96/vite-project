@@ -1,8 +1,9 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { HomePage, TestPage } from "@routes";
+import { HomePage, Analytics, Sales, Users } from "@routes";
 import { paths } from "@script/utils/globalData";
 import { LayoutWrapper } from "@globalWrappers/LayoutWrapper";
 import { CustomThemeProvider } from "@lib/CustomMuiTheme";
+import { Products } from "@routes/Products";
 
 function App() {
   const router = createBrowserRouter([
@@ -15,8 +16,20 @@ function App() {
           index: true,
         },
         {
-          element: <TestPage />,
-          path: paths.test.href,
+          element: <Analytics />,
+          path: paths.analytics.href,
+        },
+        {
+          element: <Sales />,
+          path: paths.sales.href,
+        },
+        {
+          element: <Users />,
+          path: paths.users.href,
+        },
+        {
+          element: <Products />,
+          path: paths.products.href,
         },
       ],
     },
