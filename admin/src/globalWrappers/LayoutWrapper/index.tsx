@@ -14,6 +14,7 @@ import { useTheme } from "@mui/material";
 import { HeaderSearch } from "./components";
 import { useState, useMemo } from "react";
 import { type Session } from "@toolpad/core/AppProvider";
+import { useTokenSelector } from "@lib/Redux/token/useTokenSelector";
 
 const LayoutWrapper = () => {
   const [session, setSession] = useState<Session | null>({
@@ -23,10 +24,19 @@ const LayoutWrapper = () => {
       image: "https://avatars.githubusercontent.com/u/19550456",
     },
   });
+
+  const tokenValue = useTokenSelector().value;
+  console.log(tokenValue);
+
   const NAVIGATION: Navigation = [
     {
       kind: "header",
       title: "Main items",
+    },
+    {
+      segment: paths.admin.name,
+      title: "Admin",
+      icon: <DashboardIcon />,
     },
     {
       segment: paths.home.name,
@@ -72,6 +82,11 @@ const LayoutWrapper = () => {
       segment: paths.products.name,
       title: "Products",
       icon: <LayersIcon />,
+    },
+    {
+      segment: paths.login.name,
+      title: "login",
+      // icon: <LayersIcon />,
     },
   ];
 

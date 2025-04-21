@@ -1,4 +1,5 @@
 import { NavigationPaths } from "@script/utils/enums";
+import { ApiEndpoint } from "@script/utils/types";
 
 const paths = {
   home: {
@@ -26,6 +27,22 @@ const paths = {
     href: NavigationPaths.products,
     name: NavigationPaths.products.replace("/", ""),
   },
+  login: {
+    id: 1,
+    href: NavigationPaths.login,
+    name: NavigationPaths.login.replace("/", ""),
+  },
+  admin: {
+    id: 1,
+    href: NavigationPaths.admin,
+    name: NavigationPaths.admin.replace("/", ""),
+  },
 };
 
-export { paths };
+const endpoint = import.meta.env.VITE_API_ENDPOINT;
+const apiEndpoints: Record<ApiEndpoint, string> = {
+  googleLogin: `${endpoint}/api/login/google`,
+  register: `${endpoint}/api/register`,
+};
+
+export { paths, apiEndpoints };
