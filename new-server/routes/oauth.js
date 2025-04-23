@@ -1,6 +1,7 @@
 import express from "express";
 import { OAuth2Client } from "google-auth-library";
-import User from "../model/User.js";
+// import User from "../model/User.js";
+import CryptoJS from "crypto-js";
 
 const router = express.Router();
 
@@ -16,6 +17,11 @@ const getUserData = async (access_token) => {
 };
 
 router.get("/", async (req, res) => {
+  // const asasa = CryptoJS.AES.encrypt(
+  //   "crypto",
+  //   process.env.HASHED_PASSWORD
+  // ).toString();
+  // console.log(asasa);
   const code = req.query.code;
   try {
     const redirectUrl = process.env.GOOGLE_AUTH_REDIRECT_URL;
@@ -43,14 +49,14 @@ router.get("/", async (req, res) => {
       profilePicture: payload["picture"],
     };
 
-    const alreadyExists = await User.findOne({ email: userInfo.email });
+    // const alreadyExists = await User.findOne({ email: userInfo.email });
 
-    if (!alreadyExists) {
-      res.redirect(303, `${process.env.WEBSITE_DOMAIN}/login`);
-      return res.status(401).json({
-        message: `You need admin permission for this account`,
-      });
-    }
+    // if (!alreadyExists) {
+    //   res.redirect(303, `${process.env.WEBSITE_DOMAIN}/login`);
+    //   return res.status(401).json({
+    //     message: `You need admin permission for this account`,
+    //   });
+    // }
   } catch (err) {
     console.log("Error logging in with OAuth2 user", err);
   }
