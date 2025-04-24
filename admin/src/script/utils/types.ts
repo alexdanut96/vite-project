@@ -1,3 +1,3 @@
-type ApiEndpoint = "googleLogin" | "register";
+type ApiEndpoint = "googleLogin" | "register" | "test";
 
 export type { ApiEndpoint };

@@ -8,9 +8,11 @@ const Login = () => {
 
   const loginWithGoogle = async () => {
     const fetchOptions = {
-      endpoint: `${apiEndpoints.googleLogin}`,
+      // endpoint: `${apiEndpoints.googleLogin}`,
+      endpoint: `${apiEndpoints.test}`,
       request: {
-        method: "POST",
+        // method: "POST",
+        method: "GET",
       },
     };
 
