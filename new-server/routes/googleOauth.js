@@ -13,7 +13,7 @@ const oauth2Client = new google.auth.OAuth2(
   process.env.CLIENT_ID,
   process.env.CLIENT_SECRET,
   // process.env.GOOGLE_AUTH_REDIRECT_URL
-  "http://localhost:5000/oauth2callback"
+  "http://localhost:5000/test"
 );
 
 const scopes = [
@@ -60,10 +60,10 @@ router.get("/", async (req, res) => {
     // Include the state parameter to reduce the risk of CSRF attacks.
     state: state,
   });
-  res.redirect(authorizationUrl);
-  // res.json({
-  //   url: authorizationUrl,
-  // });
+  // res.redirect(authorizationUrl);
+  res.json({
+    url: authorizationUrl,
+  });
 });
 
 router.get("/oauth2callback", async (req, res) => {

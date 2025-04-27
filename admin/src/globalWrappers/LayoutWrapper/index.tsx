@@ -26,7 +26,6 @@ const LayoutWrapper = () => {
   });
 
   const tokenValue = useTokenSelector().value;
-  console.log(tokenValue);
 
   const NAVIGATION: Navigation = [
     {
