@@ -3,8 +3,21 @@ import express from "express";
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  res.cookie("testCookie", "ALEX BURCEA 96", { maxAge: 60000 * 2 });
-  res.status(200).send({ message: "cookie test done" });
+  console.log(req.session.id);
+  req.session.visited = true;
+  res.status(200).send({ message: "get test" });
+});
+
+router.get("/cookie", async (req, res) => {
+  console.log(req.session.id);
+  req.sessionStore.get(req.session.id, (error, sessionData) => {
+    if (error) {
+      console.log(error);
+      throw error;
+    }
+    console.log(sessionData);
+  });
+  res.status(400).send({ message: "get test/cookie" });
 });
 
 export default router;
