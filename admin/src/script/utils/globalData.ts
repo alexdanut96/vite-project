@@ -42,7 +42,7 @@ const paths = {
 const endpoint = import.meta.env.VITE_API_ENDPOINT;
 const apiEndpoints: Record<ApiEndpoint, string> = {
   googleLogin: `${endpoint}/api/login/google`,
-  test: `${endpoint}/api/test`,
+  test: `${endpoint}/api/login/local/status`,
   register: `${endpoint}/api/register`,
   localLogin: `${endpoint}/api/login/local`,
 };

@@ -22,8 +22,8 @@ const LocalLogin = () => {
     };
 
     const response = await fetch(fetchOptions.endpoint, fetchOptions.request);
-    const data = await response.json();
-    console.log(data);
+    console.log(response);
+    // const data = await response.json();
   };
 
   const handleTest = async () => {

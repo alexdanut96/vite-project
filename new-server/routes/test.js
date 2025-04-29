@@ -17,6 +17,7 @@ router.get("/cookie", async (req, res) => {
     }
     console.log(sessionData);
   });
+
   res.status(400).send({ message: "get test/cookie" });
 });
 
