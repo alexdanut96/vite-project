@@ -10,6 +10,8 @@ import testRouter from "./routes/test.js";
 import localLoginRouter from "./routes/localLogin.js";
 import session from "express-session";
 import cookieParser from "cookie-parser";
+import passport from "passport";
+import "./strategies/local-strategy.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -34,17 +36,46 @@ app.use(
     },
   })
 );
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
 //routes
-app.use("/", googleOauthRouter);
+// app.use("/", googleOauthRouter);
 // app.use("/api/login", requestRoute);
 app.use("/oauth", oauthRoute);
 app.use("/api/register", regsiterRoute);
 app.use("/api/test", testRouter);
 app.use("/api/login", localLoginRouter);
 
+//authenticate
+app.post("/api/auth", passport.authenticate("local"), (req, res) => {
+  res.sendStatus(200);
+});
+
+app.get("/api/auth/status", (req, res) => {
+  console.log("inside auth status", req.user);
+  console.log(req.sessionStore.sessions);
+  if (!req.user) {
+    return res.status(401).send({ message: "Unauthorized. Please login" });
+  }
+  res.status(200).send(req.user);
+});
+
+app.post("/api/auth/logout", (req, res) => {
+  if (!req.user) {
+    return res.status(401).send({ message: "Unauthorized" });
+  }
+  req.logOut((error) => {
+    if (error) {
+      return res.status(400).send({ message: error });
+    }
+    return res.sendStatus(200);
+  });
+});
+
 // app.get("/", (req, res) => {
+//   console.log(req);
 //   res.send("API Working");
 // });
 

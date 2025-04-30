@@ -5,6 +5,7 @@ import CryptoJS from "crypto-js";
 const router = express.Router();
 
 router.post("/local", async (req, res) => {
+  console.log(req);
   const { body } = req;
 
   if (!body || !body.email || !body.password) {
@@ -33,6 +34,9 @@ router.post("/local", async (req, res) => {
 });
 
 router.get("/local/status", (req, res) => {
+  req.sessionStore.get(req.sessionID, (error, sessionData) => {
+    console.log(sessionData);
+  });
   return req.session.client
     ? res.status(200).send(req.session.client)
     : res.status(401).send({ message: "Not Authenticated" });
