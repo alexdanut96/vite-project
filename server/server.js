@@ -12,6 +12,7 @@ import session from "express-session";
 import cookieParser from "cookie-parser";
 import passport from "passport";
 import "./strategies/local-strategy.js";
+import MongoStore from "connect-mongo";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -34,6 +35,9 @@ app.use(
     cookie: {
       maxAge: 60000 * 60,
     },
+    store: MongoStore.create({
+      client: mongoose.connection.getClient(),
+    }),
   })
 );
 app.use(passport.initialize());
