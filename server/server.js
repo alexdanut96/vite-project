@@ -33,6 +33,9 @@ app.use(
     saveUninitialized: false,
     cookie: {
       maxAge: 60000 * 60,
+      path: "/",
+      domain: ".alexandru-danut-burcea.com",
+      httpOnly: true,
     },
   })
 );
@@ -54,5 +57,5 @@ app.use("/api/auth", authRouter);
 // });
 
 app.listen(PORT, () => {
-  console.log(`The server is up and running on portttt ${PORT}`);
+  console.log(`The server is up and running on port ${PORT}`);
 });
