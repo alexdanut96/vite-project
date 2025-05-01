@@ -44,7 +44,7 @@ const apiEndpoints: Record<ApiEndpoint, string> = {
   googleLogin: `${endpoint}/api/login/google`,
   test: `${endpoint}/api/login/local/status`,
   register: `${endpoint}/api/register`,
-  localLogin: `${endpoint}/api/login/local`,
+  authentication: `${endpoint}/api/auth`,
 };
 
 export { paths, apiEndpoints };

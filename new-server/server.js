@@ -7,7 +7,7 @@ import oauthRoute from "./routes/oauth.js";
 import googleOauthRouter from "./routes/googleOauth.js";
 import testRouter from "./routes/test.js";
 import userRouter from "./routes/user.js";
-import localLoginRouter from "./routes/localLogin.js";
+import authRouter from "./routes/auth.js";
 import session from "express-session";
 import cookieParser from "cookie-parser";
 import passport from "passport";
@@ -45,34 +45,8 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 // app.use("/api/login", requestRoute);
 app.use("/oauth", oauthRoute);
 app.use("/api/test", testRouter);
-app.use("/api/login", localLoginRouter);
 app.use("/api/user", userRouter);
-
-//authenticate
-app.post("/api/auth", passport.authenticate("local"), (req, res) => {
-  res.sendStatus(200);
-});
-
-app.get("/api/auth/status", (req, res) => {
-  console.log("inside auth status", req.user);
-  console.log(req.sessionStore.sessions);
-  if (!req.user) {
-    return res.status(401).send({ message: "Unauthorized. Please login" });
-  }
-  res.status(200).send(req.user);
-});
-
-app.post("/api/auth/logout", (req, res) => {
-  if (!req.user) {
-    return res.status(401).send({ message: "Unauthorized" });
-  }
-  req.logOut((error) => {
-    if (error) {
-      return res.status(400).send({ message: error });
-    }
-    return res.sendStatus(200);
-  });
-});
+app.use("/api/auth", authRouter);
 
 // app.get("/", (req, res) => {
 //   console.log(req);

@@ -11,7 +11,7 @@ const LocalLogin = () => {
     };
 
     const fetchOptions = {
-      endpoint: `${apiEndpoints.localLogin}`,
+      endpoint: `${apiEndpoints.authentication}`,
       request: {
         method: "POST",
         headers: {
@@ -26,11 +26,24 @@ const LocalLogin = () => {
     // const data = await response.json();
   };
 
-  const handleTest = async () => {
+  const getUserData = async () => {
     const fetchOptions = {
-      endpoint: `${apiEndpoints.test}`,
+      endpoint: `${apiEndpoints.authentication}/status`,
       request: {
         method: "GET",
+      },
+    };
+
+    const response = await fetch(fetchOptions.endpoint, fetchOptions.request);
+    const data = await response.json();
+    console.log(data);
+  };
+
+  const handleLogout = async () => {
+    const fetchOptions = {
+      endpoint: `${apiEndpoints.authentication}/logout`,
+      request: {
+        method: "POST",
       },
     };
 
@@ -53,8 +66,12 @@ const LocalLogin = () => {
           Login
         </Button>
       </Form>
-      <Button variant="contained" onClick={handleTest}>
-        Test
+      <Button variant="contained" onClick={getUserData}>
+        Get user data
+      </Button>
+
+      <Button variant="outlined" onClick={handleLogout}>
+        Logout
       </Button>
     </StyledBox>
   );
