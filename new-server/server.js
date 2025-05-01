@@ -7,6 +7,7 @@ import oauthRoute from "./routes/oauth.js";
 import regsiterRoute from "./routes/register.js";
 import googleOauthRouter from "./routes/googleOauth.js";
 import testRouter from "./routes/test.js";
+import clientRouter from "./routes/client.js";
 import localLoginRouter from "./routes/localLogin.js";
 import session from "express-session";
 import cookieParser from "cookie-parser";
@@ -47,6 +48,7 @@ app.use("/oauth", oauthRoute);
 app.use("/api/register", regsiterRoute);
 app.use("/api/test", testRouter);
 app.use("/api/login", localLoginRouter);
+app.use("/api/client", clientRouter);
 
 //authenticate
 app.post("/api/auth", passport.authenticate("local"), (req, res) => {
