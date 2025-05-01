@@ -33,9 +33,6 @@ app.use(
     saveUninitialized: false,
     cookie: {
       maxAge: 60000 * 60,
-      path: "/",
-      domain: ".alexandru-danut-burcea.com",
-      httpOnly: true,
     },
   })
 );
