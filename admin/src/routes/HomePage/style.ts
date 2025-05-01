@@ -1,7 +1,7 @@
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 
-const StyleContainer = styled(Box)(({ theme }) => ({
+const StyleContainer = styled(Box)(() => ({
   height: "100%",
 
   //   [theme.breakpoints.down("sm")]: {

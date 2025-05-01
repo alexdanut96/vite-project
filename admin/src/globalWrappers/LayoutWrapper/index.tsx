@@ -14,7 +14,7 @@ import { useTheme } from "@mui/material";
 import { HeaderSearch } from "./components";
 import { useState, useMemo } from "react";
 import { type Session } from "@toolpad/core/AppProvider";
-import { useTokenSelector } from "@lib/Redux/token/useTokenSelector";
+// import { useTokenSelector } from "@lib/Redux/token/useTokenSelector";
 
 const LayoutWrapper = () => {
   const [session, setSession] = useState<Session | null>({
@@ -25,7 +25,7 @@ const LayoutWrapper = () => {
     },
   });
 
-  const tokenValue = useTokenSelector().value;
+  // const tokenValue = useTokenSelector().value;
 
   const NAVIGATION: Navigation = [
     {
