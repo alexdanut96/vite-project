@@ -1,4 +1,4 @@
-export const createClientValidationSchema = {
+export const createUserValidationSchema = {
   email: {
     notEmpty: {
       errorMessage: "Email cannot be empty",

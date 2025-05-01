@@ -5,8 +5,8 @@ import {
   checkSchema,
   matchedData,
 } from "express-validator";
-import { createClientValidationSchema } from "../utils/validationSchemas.js";
-import { createClientHandler } from "../handelers/clientHandelers.js";
+import { createUserValidationSchema } from "../utils/validationSchemas.js";
+import { createUserHandler } from "../handelers/clientHandelers.js";
 
 const router = expresss.Router();
 
@@ -16,8 +16,8 @@ router.get("/", (req, res) => {
 
 router.post(
   "/",
-  checkSchema(createClientValidationSchema, ["body"]),
-  createClientHandler
+  checkSchema(createUserValidationSchema, ["body"]),
+  createUserHandler
 );
 
 export default router;

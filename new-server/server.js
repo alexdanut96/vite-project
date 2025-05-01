@@ -4,10 +4,9 @@ import cors from "cors";
 import mongoose from "mongoose";
 import requestRoute from "./routes/request.js";
 import oauthRoute from "./routes/oauth.js";
-import regsiterRoute from "./routes/register.js";
 import googleOauthRouter from "./routes/googleOauth.js";
 import testRouter from "./routes/test.js";
-import clientRouter from "./routes/client.js";
+import userRouter from "./routes/user.js";
 import localLoginRouter from "./routes/localLogin.js";
 import session from "express-session";
 import cookieParser from "cookie-parser";
@@ -45,10 +44,9 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 // app.use("/", googleOauthRouter);
 // app.use("/api/login", requestRoute);
 app.use("/oauth", oauthRoute);
-app.use("/api/register", regsiterRoute);
 app.use("/api/test", testRouter);
 app.use("/api/login", localLoginRouter);
-app.use("/api/client", clientRouter);
+app.use("/api/user", userRouter);
 
 //authenticate
 app.post("/api/auth", passport.authenticate("local"), (req, res) => {

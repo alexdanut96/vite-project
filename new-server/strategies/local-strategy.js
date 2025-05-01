@@ -1,6 +1,6 @@
 import passport from "passport";
 import { Strategy } from "passport-local";
-import { Client } from "../model/Client.js";
+import { User } from "../model/User.js";
 import CryptoJS from "crypto-js";
 
 passport.serializeUser((user, done) => {
@@ -11,11 +11,11 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser(async (id, done) => {
   console.log("inside deserialize user", id);
   try {
-    const foundClient = await Client.findById(id);
-    if (!foundClient) {
-      throw Error("Client not found");
+    const foundUser = await User.findById(id);
+    if (!foundUser) {
+      throw Error("User not found");
     }
-    done(null, foundClient);
+    done(null, foundUser);
   } catch (error) {
     done(error, null);
   }
@@ -26,22 +26,22 @@ export default passport.use(
     console.log(`email: ${email}`);
     console.log(`password: ${password}`);
     try {
-      const foundClient = await Client.findOne({ email: email });
-      if (!foundClient) {
-        throw Error("Client not found");
+      const foundUser = await User.findOne({ email: email });
+      if (!foundUser) {
+        throw Error("User not found");
       }
 
       const hashedPassword = CryptoJS.AES.decrypt(
-        foundClient.password,
+        foundUser.password,
         process.env.HASHED_PASSWORD
       ).toString(CryptoJS.enc.Utf8);
 
       if (hashedPassword !== password) {
         throw Error("Wrong password");
       }
-      done(null, foundClient);
-      //   req.session.client = foundClient.id;
-      //   return res.status(200).send(foundClient);
+      done(null, foundUser);
+      //   req.session.user = foundUser.id;
+      //   return res.status(200).send(foundUser);
     } catch (error) {
       done(error, null);
     }
