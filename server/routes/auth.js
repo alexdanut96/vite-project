@@ -9,7 +9,8 @@ router.post("/", passport.authenticate("local"), (req, res) => {
 
 router.get("/status", (req, res) => {
   console.log("inside auth status", req.user);
-  console.log(req.sessionStore.sessions);
+  // console.log(req.sessionStore.sessions);
+  // console.log(req.session);
   if (!req.user) {
     return res.status(401).send({ message: "Unauthorized. Please login" });
   }

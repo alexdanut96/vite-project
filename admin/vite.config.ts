@@ -6,6 +6,15 @@ import path from "path";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), svgr()],
+      server: {
+      proxy: {
+        '/api': {
+          target: 'http://localhost:5000',
+          changeOrigin: true,
+          secure: false,
+        },
+      },
+    },
   build: {
     outDir: "./build",
   },
