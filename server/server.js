@@ -44,11 +44,16 @@ mongoose
   .catch((err) => console.log(err));
 
 //middlewares
+const WEBSITE_DOMAINS = [
+  "https://alexandru-danut-burcea.com",
+  "https://admin.alexandru-danut-burcea.com",
+  "http://localhost:5173",
+];
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      if (process.env.WEBSITE_DOMAINS.indexOf(origin) !== -1 || !origin) {
+      if (WEBSITE_DOMAINS.indexOf(origin) !== -1 || !origin) {
         callback(null, true); // Allow the request
       } else {
         callback(new Error("Not allowed by CORS")); // Block the request
