@@ -11,15 +11,15 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [react(), svgr()],
-    server: {
-      proxy: {
-        "/api": {
-          target: "https://api.alexandru-datut-burcea.com",
-          changeOrigin: true,
-          secure: false,
-        },
-      },
-    },
+    // server: {
+    //   proxy: {
+    //     "/api": {
+    //       target: endpoint,
+    //       changeOrigin: true,
+    //       secure: false,
+    //     },
+    //   },
+    // },
     build: {
       outDir: "./build",
     },
