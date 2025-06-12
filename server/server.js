@@ -46,7 +46,9 @@ mongoose
 //middlewares
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: process.env.IN_PRODUCTION
+      ? process.env.WEBSITE_DOMAIN
+      : "http://localhost:5173",
     credentials: true,
   })
 );
@@ -59,9 +61,9 @@ app.use(
     saveUninitialized: false,
     cookie: {
       maxAge: 60000 * 60,
-      secure: false,
+      secure: process.env.IN_PRODUCTION,
       httpOnly: true,
-      sameSite: "Lax",
+      sameSite: process.env.IN_PRODUCTION ? "None" : "Lax",
     },
     store: MongoStore.create({
       client: mongoose.connection.getClient(),
