@@ -44,11 +44,16 @@ mongoose
   .catch((err) => console.log(err));
 
 //middlewares
+
 app.use(
   cors({
-    origin: process.env.IN_PRODUCTION
-      ? process.env.WEBSITE_DOMAIN
-      : "http://localhost:5173",
+    origin: function (origin, callback) {
+      if (process.env.WEBSITE_DOMAINS.indexOf(origin) !== -1 || !origin) {
+        callback(null, true); // Allow the request
+      } else {
+        callback(new Error("Not allowed by CORS")); // Block the request
+      }
+    },
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization", "Set-Cookie"],
