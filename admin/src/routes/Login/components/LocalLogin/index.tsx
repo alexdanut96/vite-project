@@ -11,8 +11,8 @@ const LocalLogin = () => {
     };
 
     const fetchOptions = {
-      // endpoint: `${apiEndpoints.authentication}`,
-      endpoint: `/api/auth`,
+      endpoint: `${apiEndpoints.authentication}`,
+      // endpoint: `/api/auth`,
       request: {
         method: "POST",
         headers: {
@@ -30,8 +30,8 @@ const LocalLogin = () => {
 
   const getUserData = async () => {
     const fetchOptions = {
-      // endpoint: `${apiEndpoints.authentication}/status`,
-      endpoint: `/api/auth/status`,
+      endpoint: `${apiEndpoints.authentication}/status`,
+      // endpoint: `/api/auth/status`,
       request: {
         method: "GET",
         headers: {
