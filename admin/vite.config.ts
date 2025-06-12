@@ -7,19 +7,18 @@ import path from "path";
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
   const endpoint = env.VITE_API_ENDPOINT;
-  console.log(endpoint);
 
   return {
     plugins: [react(), svgr()],
-    // server: {
-    //   proxy: {
-    //     "/api": {
-    //       target: endpoint,
-    //       changeOrigin: true,
-    //       secure: false,
-    //     },
-    //   },
-    // },
+    server: {
+      proxy: {
+        "/api": {
+          target: endpoint,
+          changeOrigin: true,
+          secure: false,
+        },
+      },
+    },
     build: {
       outDir: "./build",
     },
