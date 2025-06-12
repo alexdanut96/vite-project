@@ -11,15 +11,15 @@ const LocalLogin = () => {
     };
 
     const fetchOptions = {
-      // endpoint: `${apiEndpoints.authentication}`,
-      endpoint: `/api/auth`,
+      endpoint: `${apiEndpoints.authentication}`,
+      // endpoint: `/api/auth`,
       request: {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(loginPayload),
-      credentials: "include" as RequestCredentials
+        credentials: "include" as RequestCredentials,
       },
     };
 
@@ -30,15 +30,15 @@ const LocalLogin = () => {
 
   const getUserData = async () => {
     const fetchOptions = {
-      // endpoint: `${apiEndpoints.authentication}/status`,
-      endpoint: `/api/auth/status`,
+      endpoint: `${apiEndpoints.authentication}/status`,
+      // endpoint: `/api/auth/status`,
       request: {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
       },
-      credentials: "include" as RequestCredentials
+      credentials: "include" as RequestCredentials,
     };
 
     const response = await fetch(fetchOptions.endpoint, fetchOptions.request);
