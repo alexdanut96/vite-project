@@ -44,21 +44,22 @@ mongoose
   .catch((err) => console.log(err));
 
 //middlewares
-const WEBSITE_DOMAINS = [
-  "https://alexandru-danut-burcea.com",
-  "https://admin.alexandru-danut-burcea.com",
-  "http://localhost:5173",
-];
+// const WEBSITE_DOMAINS = [
+//   "https://alexandru-danut-burcea.com",
+//   "https://admin.alexandru-danut-burcea.com",
+//   "http://localhost:5173",
+// ];
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (WEBSITE_DOMAINS.indexOf(origin) !== -1 || !origin) {
-        callback(null, true); // Allow the request
-      } else {
-        callback(new Error("Not allowed by CORS")); // Block the request
-      }
-    },
+    origin: "https://admin.alexandru-danut-burcea.com",
+    // origin: function (origin, callback) {
+    //   if (WEBSITE_DOMAINS.indexOf(origin) !== -1 || !origin) {
+    //     callback(null, true); // Allow the request
+    //   } else {
+    //     callback(new Error("Not allowed by CORS")); // Block the request
+    //   }
+    // },
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization", "Set-Cookie"],
