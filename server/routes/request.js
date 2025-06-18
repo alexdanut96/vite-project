@@ -10,8 +10,8 @@ router.post("/google", async (req, res) => {
   const redirectUrl = process.env.GOOGLE_AUTH_REDIRECT_URL;
 
   const oAuth2Client = new OAuth2Client(
-    process.env.CLIENT_ID,
-    process.env.CLIENT_SECRET,
+    process.env.GOOGLE_CLIENT_ID,
+    process.env.GOOGLE_CLIENT_SECRET,
     redirectUrl
   );
 

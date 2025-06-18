@@ -5,7 +5,8 @@ const router = express.Router();
 router.get("/", async (req, res) => {
   console.log(req.session.id);
   req.session.visited = true;
-  res.status(200).send({ message: "get test" });
+  res.redirect("http://localhost:5173");
+  // res.status(200).send({ message: "get test" });
 });
 
 router.get("/cookie", async (req, res) => {

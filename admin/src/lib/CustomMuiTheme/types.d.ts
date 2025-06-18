@@ -56,3 +56,9 @@ declare module "@mui/material/styles" {
 
   // export function createTheme(options?: ThemeOptions): Theme;
 }
+
+declare global {
+  interface Window {
+    google: any;
+  }
+}

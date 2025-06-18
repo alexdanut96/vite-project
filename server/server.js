@@ -63,13 +63,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
-//routes
-// app.use("/", googleOauthRouter);
+//routes\
+app.use("/api/tools/auth/google", googleOauthRouter);
+// app.use("/api/tools/auth/google/callback", testRouter);
 // app.use("/api/login", requestRoute);
 app.use("/oauth", oauthRoute);
-app.use("/api/test", testRouter);
 app.use("/api/user", userRouter);
-app.use("/api/auth", authRouter);
+app.use("/api/auth/local", authRouter);
 app.use("/", rootRouter);
 
 app.listen(PORT, () => {

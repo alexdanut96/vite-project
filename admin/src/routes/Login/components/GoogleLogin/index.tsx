@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import { apiEndpoints } from "@script/utils/globalData";
+// import { apiEndpoints } from "@script/utils/globalData";
 
 const GoogleLogin = () => {
   const navigate = (url: string) => {
@@ -9,7 +9,8 @@ const GoogleLogin = () => {
   const loginWithGoogle = async () => {
     const fetchOptions = {
       // endpoint: `${apiEndpoints.googleLogin}`,
-      endpoint: `${apiEndpoints.test}`,
+      // endpoint: `${apiEndpoints.test}`,
+      endpoint: `/api/tools/auth/google`,
       request: {
         // method: "POST",
         method: "GET",
@@ -18,9 +19,10 @@ const GoogleLogin = () => {
 
     const response = await fetch(fetchOptions.endpoint, fetchOptions.request);
     const data = await response.json();
-    console.log(response);
+    console.log(data);
     navigate(data.url);
   };
+
   return (
     <>
       <Button

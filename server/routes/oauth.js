@@ -27,8 +27,8 @@ router.get("/", async (req, res) => {
     const redirectUrl = process.env.GOOGLE_AUTH_REDIRECT_URL;
 
     const oAuth2Client = new OAuth2Client(
-      process.env.CLIENT_ID,
-      process.env.CLIENT_SECRET,
+      process.env.GOOGLE_CLIENT_ID,
+      process.env.GOOGLE_CLIENT_SECRET,
       redirectUrl
     );
 
@@ -38,7 +38,7 @@ router.get("/", async (req, res) => {
 
     const ticket = await oAuth2Client.verifyIdToken({
       idToken: oAuth2Client.credentials.id_token,
-      audience: process.env.CLIENT_ID,
+      audience: process.env.GOOGLE_CLIENT_ID,
     });
     const payload = ticket.getPayload();
 

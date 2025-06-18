@@ -12,7 +12,7 @@ const LocalLogin = () => {
 
     const fetchOptions = {
       // endpoint: `${apiEndpoints.authentication}`,
-      endpoint: `/api/auth`,
+      endpoint: `/api/auth/local`,
       request: {
         method: "POST",
         headers: {
